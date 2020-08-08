@@ -11,14 +11,15 @@ const conn = mysql.createConnection({
 	database: 'remsme'
 });
 
+
 app.listen(3000, () => {
 	console.log('Server is listen port 3000...')
 });
 
 conn.connect((err) => {
 	if(err) throw err;
-	console.log('Mysql Connected..')
-})
+	console.log('Mysql Connected..');
+});
 
 
 app.set('view-engine', 'ejs');
@@ -33,9 +34,9 @@ app.get('/', (req, res) => {
 	let sql = 'SELECT * FROM akun';
 	let query = conn.query(sql, (err, results) => {
 		if(err) throw err;
-	  res.render('index.ejs', {
-	  	results: results
-	  });
+	   res.render('index.ejs', {
+	  	  results: results
+	   });
 	});
 });
 
