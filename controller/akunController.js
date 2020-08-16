@@ -1,12 +1,17 @@
 const request = require('../model/Akun');
 const con = require('../config/db');
 
+const db_connect = con.connect((err) => {
+	if(err) throw err;
+  console.log('Mysql Connected..');
+});
+  
 const akun_index = (req, res) => {
 	request.getAll(con, (err, rows) => {
 		if(err) throw err;
 		res.render('index.ejs', {results : rows});
-	});
-}
+	})
+};
 
 const akun_create = (req, res) => {
 	request.postAdd(con, req.body, (err) => {
@@ -29,11 +34,10 @@ const akun_delete = (req, res) => {
 	});
 }
 
-const akun_get_create = (req, res) => {
-	res.render('add.ejs');
-}
+const akun_get_create = (req, res) => res.render('add.ejs');
 
 module.exports = {
+	db_connect,
 	akun_index,
 	akun_create,
 	akun_get_create,
