@@ -1,2 +1,5 @@
 node_modules/
 public/
+.git/
+package.json
+package-lock.json
