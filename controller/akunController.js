@@ -18,7 +18,7 @@ db_connect
 const akun_index = (req, res) => {
 	request.getAll(con, (err, rows) => {
 		if(err) {
-			res.render('add.ejs');
+			res.render('db_err.ejs');
 		} else {
 		  res.render('index.ejs', {results : rows});
 	  }
