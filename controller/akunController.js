@@ -27,22 +27,31 @@ const akun_index = (req, res) => {
 
 const akun_create = (req, res) => {
 	request.postAdd(con, req.body, (err) => {
-		if(err) throw err;
-		res.redirect('/');
+		if(err) {
+			res.render('db_err.ejs');
+		} else {
+		  res.redirect('/');
+	  }
 	});
 }
 
 const akun_update = (req, res) => {
 	request.postUpdate(con, req.body, req.body.id, (err) => {
-		if(err) throw err;
-		res.redirect('/');
+		if(err) {
+			res.render('db_err.ejs');
+		} else {
+		  res.redirect('/');
+	  }
 	});
 }
 
 const akun_delete = (req, res) => {
 	request.postDelete(con, req.body.id, (err) => {
-		if(err) throw err;
-	  res.redirect('/');
+		if(err) {
+			res.render('db_err.ejs');
+		} else {
+		  res.redirect('/');
+	  }
 	});
 }
 
