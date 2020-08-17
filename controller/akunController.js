@@ -1,15 +1,27 @@
 const request = require('../model/Akun');
 const con = require('../config/db');
 
-const db_connect = con.connect((err) => {
-	if(err) throw err;
-  console.log('Mysql Connected..');
+const db_connect = new Promise((resolve, reject) => {
+	con.connect((err) => {
+		if(err) {
+		  reject('Mysql Disconnected!')
+		} else {
+		  resolve('Mysql Connected...')
+		}
+	});
 });
+
+db_connect
+  .then(() => console.log(db_connect))
+  .catch(() => console.error(db_connect));
   
 const akun_index = (req, res) => {
 	request.getAll(con, (err, rows) => {
-		if(err) throw err;
-		res.render('index.ejs', {results : rows});
+		if(err) {
+			res.render('add.ejs');
+		} else {
+		  res.render('index.ejs', {results : rows});
+	  }
 	})
 };
 
