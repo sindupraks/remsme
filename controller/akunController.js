@@ -4,9 +4,9 @@ const con = require('../config/db');
 const db_connect = new Promise((resolve, reject) => {
 	con.connect((err) => {
 		if(err) {
-		  reject('Mysql Disconnected!')
+		  reject('Database Disconnected!')
 		} else {
-		  resolve('Mysql Connected...')
+		  resolve('Database Connected...')
 		}
 	});
 });
@@ -16,14 +16,14 @@ db_connect
   .catch(() => console.error(db_connect));
   
 const akun_index = (req, res) => {
-	request.getAll(con, (err, rows) => {
-		if(err) {
-			res.render('db_err.ejs');
-		} else {
-		  res.render('index.ejs', {results : rows});
+  request.getAll(con, (err, rows) => {
+ 	  if(err){
+ 		  res.render('db_err.ejs');
 	  }
-	})
-};
+  	res.render('index.ejs', {results : rows})
+  });
+}
+
 
 const akun_create = (req, res) => {
 	request.postAdd(con, req.body, (err) => {
